@@ -782,43 +782,47 @@
                     <p class="text-slate-500">Send a message for invitations or scholarly inquiries.</p>
                 </div>
 
-                                    <form action="https://formsubmit.co/bilalshajamali@gmail.com" method="POST">
-                        <!-- FormSubmit configuration -->
-                        <input type="hidden" name="_subject" value="New Message from Bilalsha Website">
-                        <input type="hidden" name="_captcha" value="true">
-                        <input type="hidden" name="_template" value="table">
+                                 <form action="https://formsubmit.co/bilalshajamali@gmail.com" method="POST">
+    <!-- FormSubmit config -->
+    <input type="hidden" name="_subject" value="New Message from Bilalsha Website">
+    <input type="hidden" name="_captcha" value="true">
+    <input type="hidden" name="_template" value="table">
 
-                        <!-- Optional: anti-bot honeypot (invisible to users, helps block spam) -->
-                        <input type="text" name="_honey" style="display:none">
+    <!-- after success, come back to this site and show success message -->
+    <input type="hidden" name="_next" value="https://arif-1411.github.io/?success=true#contact">
 
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label for="name" class="form-label fw-medium text-slate-700 small">Your Name</label>
-                                <input type="text" name="name" id="name" class="contact-input" placeholder="Name" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="email" class="form-label fw-medium text-slate-700 small">Your Email</label>
-                                <input type="email" name="email" id="email" class="contact-input" placeholder="Email" required>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="subject" class="form-label fw-medium text-slate-700 small">Subject</label>
-                            <input type="text" name="subject" id="subject" class="contact-input" placeholder="Subject" required>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="message" class="form-label fw-medium text-slate-700 small">Message</label>
-                            <textarea name="message" id="message" rows="4" class="contact-input" placeholder="Message" required></textarea>
-                        </div>
+    <!-- optional anti‑bot honeypot -->
+    <input type="text" name="_honey" style="display:none">
 
-                        <div class="d-flex justify-content-center justify-content-md-end mt-2">
-                            <button type="submit" class="btn contact-submit-btn">
-                                Send Message
-                                <i class="bi bi-send"></i>
-                            </button>
-                        </div>
-                    </form>
+    <!-- your existing fields -->
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            <label for="name" class="form-label fw-medium text-slate-700 small">Your Name</label>
+            <input type="text" name="name" id="name" class="contact-input" placeholder="Name" required>
+        </div>
+        <div class="col-md-6">
+            <label for="email" class="form-label fw-medium text-slate-700 small">Your Email</label>
+            <input type="email" name="email" id="email" class="contact-input" placeholder="Email" required>
+        </div>
+    </div>
+    
+    <div class="mb-3">
+        <label for="subject" class="form-label fw-medium text-slate-700 small">Subject</label>
+        <input type="text" name="subject" id="subject" class="contact-input" placeholder="Subject" required>
+    </div>
+    
+    <div class="mb-4">
+        <label for="message" class="form-label fw-medium text-slate-700 small">Message</label>
+        <textarea name="message" id="message" rows="4" class="contact-input" placeholder="Message" required></textarea>
+    </div>
+
+    <div class="d-flex justify-content-center justify-content-md-end mt-2">
+        <button type="submit" class="btn contact-submit-btn">
+            Send Message
+            <i class="bi bi-send"></i>
+        </button>
+    </div>
+</form>
             </div>
 
         </div>
