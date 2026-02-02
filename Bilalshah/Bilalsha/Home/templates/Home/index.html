@@ -902,6 +902,98 @@
                 }
             })
         });
+
+
+        <script>
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+    });
+
+    // Navbar Scroll Effect
+    const navbar = document.getElementById('mainNavbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Close mobile menu on click
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuToggle = document.querySelector('.navbar-collapse');
+    const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle: false});
+    
+    navLinks.forEach((l) => {
+        l.addEventListener('click', () => {
+            if(menuToggle.classList.contains('show')) {
+                bsCollapse.hide();
+            }
+        });
+    });
+
+    // ===== AJAX contact form: send to FormSubmit, show local success message =====
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contactForm');
+        const successAlert = document.getElementById('contactSuccess');
+        const errorAlert = document.getElementById('contactError');
+        const submitButton = form ? form.querySelector('button[type="submit"]') : null;
+
+        if (!form) return;
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // stop normal navigation to FormSubmit page
+
+            // simple bot check: if honeypot filled, don't send
+            const honey = form.querySelector('input[name="_honey"]');
+            if (honey && honey.value) {
+                return; // likely bot, silently ignore
+            }
+
+            // disable button while sending
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.innerHTML = 'Sending... <i class="bi bi-arrow-repeat"></i>';
+            }
+
+            fetch('https://formsubmit.co/ajax/bilalshajamali@gmail.com', {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                // show success
+                if (successAlert) successAlert.classList.remove('d-none');
+                if (errorAlert) errorAlert.classList.add('d-none');
+                form.reset();
+            })
+            .catch(error => {
+                // show error
+                if (successAlert) successAlert.classList.add('d-none');
+                if (errorAlert) errorAlert.classList.remove('d-none');
+                console.error('Form submit error:', error);
+            })
+            .finally(() => {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Send Message <i class="bi bi-send"></i>';
+                }
+            });
+        });
+    });
+</script>
+
+    
     </script>
 </body>
 </html>
