@@ -766,34 +766,33 @@
     </section>
 
 
-
-
-
-<!-- Contact Section (Form only, finalized & production-ready) -->
+<!-- Contact Section -->
 <section id="contact" class="section-padding bg-white">
     <div class="container" data-aos="fade-up">
         <div class="bg-white rounded-4xl shadow-custom-2xl overflow-hidden">
             
             <div class="p-4 p-lg-5 d-flex flex-column justify-content-center">
+                
                 <div class="mb-5">
                     <h2 class="fw-bold text-slate-900 mb-2 h2">Get in Touch</h2>
                     <p class="text-slate-500">Send a message for invitations or scholarly inquiries.</p>
                 </div>
 
-                <input type="hidden" name="_next" value="https://arif-1411.github.io/">
-                <input type="hidden" name="_disable_logo" value="true">
+                <!-- Success Message -->
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-success mb-4">
+                        {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
 
-                    
-                    <!-- FormSubmit settings -->
-                    <input type="hidden" name="_subject" value="New Message from Bilalsha Website">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
-                    <input type="hidden" name="_autoresponse"
-                        value="Thank you for your message. I will get back to you soon, In shaa Allah.">
+                <!-- Django Contact Form -->
+                <form method="POST" action="{% url 'contact' %}">
+                    {% csrf_token %}
 
                     <!-- Anti-spam honeypot -->
-                    <input type="text" name="_honey" style="display:none">
+                    <input type="text" name="website" style="display:none">
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
@@ -822,11 +821,13 @@
                         </button>
                     </div>
                 </form>
-            </div>
 
+            </div>
         </div>
     </div>
 </section>
+
+
 
 <!-- Footer -->
 <footer class="bg-slate-50 py-5 border-top border-slate-200">
