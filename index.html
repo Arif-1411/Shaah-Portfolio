@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilalsha Jamali Nizami Tanur</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- 1. Variables & Global Styles (Matching Tailwind Config) --- */
+        :root {
+            /* Fonts */
+            --font-sans: "Poppins", sans-serif;
+            --font-heading: "Raleway", sans-serif;
+            --font-serif: "Merriweather", serif;
+
+            /* Colors (Tailwind Slate & Emerald mappings) */
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-400: #94a3b8;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+
+            --emerald-50: #ecfdf5;
+            --emerald-100: #d1fae5;
+            --emerald-200: #a7f3d0;
+            --emerald-500: #10b981;
+            --emerald-600: #059669;
+            --emerald-700: #047857;
+
+            /* Selection */
+            --selection-bg: var(--emerald-100);
+            --selection-text: var(--emerald-900);
+        }
+
+        ::selection {
+            background: var(--selection-bg);
+            color: #064e3b; /* emerald-900 */
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--slate-50);
+            color: var(--slate-700);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--slate-800);
+        }
+
+        a { text-decoration: none; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--emerald-500); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--emerald-600); }
+
+        /* --- 2. Utility Classes (Replicating Tailwind) --- */
+        .text-emerald { color: var(--emerald-600) !important; }
+        .bg-emerald { background-color: var(--emerald-600) !important; }
+        .text-slate-500 { color: var(--slate-500) !important; }
+        .text-slate-600 { color: var(--slate-600) !important; }
+        .bg-slate-50 { background-color: var(--slate-50) !important; }
+        .bg-slate-900 { background-color: var(--slate-900) !important; }
+        
+        .section-padding { padding-top: 5rem; padding-bottom: 5rem; }
+        .rounded-2xl { border-radius: 1rem !important; }
+        .rounded-3xl { border-radius: 1.5rem !important; }
+        .rounded-4xl { border-radius: 2rem !important; }
+        
+        .shadow-custom { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        .shadow-custom-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .shadow-custom-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+
+        .object-cover { object-fit: cover; width: 100%; height: 100%; }
+        
+        /* Buttons */
+        .btn-emerald {
+            background-color: var(--emerald-600);
+            color: white;
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .btn-emerald:hover { background-color: var(--emerald-700); color: white; box-shadow: 0 0 0 4px var(--emerald-100); }
+        
+        .btn-outline-custom {
+            border: 2px solid var(--slate-200);
+            color: var(--slate-700);
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+        .btn-outline-custom:hover {
+            border-color: var(--emerald-600);
+            color: var(--emerald-600);
+        }
+
+        /* --- 3. Component Specific Styles --- */
+
+        /* Header */
+        .navbar {
+            transition: all 0.3s ease;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .navbar.scrolled {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .nav-link {
+            color: var(--slate-600) !important;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-link:hover { color: var(--emerald-600) !important; }
+
+        /* Hero */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            padding-top: 8rem;
+            padding-bottom: 5rem;
+            overflow: hidden;
+        }
+        .hero-bg-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(236, 253, 245, 0.5), rgba(255, 255, 255, 0.2));
+            pointer-events: none;
+            z-index: 0;
+        }
+        .hero-card-icon {
+            width: 3rem; height: 3rem;
+            background-color: var(--emerald-50);
+            color: var(--emerald-600);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* About */
+        .check-list-item h5 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem; }
+        
+        /* Services */
+        .service-card {
+            border: 1px solid var(--slate-100);
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: transparent;
+        }
+        .service-icon {
+            width: 3.5rem; height: 3.5rem;
+            background-color: var(--emerald-50);
+            color: var(--emerald-600);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.875rem;
+            transition: all 0.3s;
+        }
+        .service-card:hover .service-icon {
+            background-color: var(--emerald-600);
+            color: white;
+        }
+        .service-card:hover h3 { color: var(--emerald-600); }
+
+        /* Public Engagement (Tabs) */
+        .nav-pills .nav-link {
+            text-align: left;
+            color: var(--slate-500);
+            font-weight: 600;
+            font-size: 1.125rem;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid transparent;
+            border-radius: 0.5rem;
+            background: transparent;
+        }
+        .nav-pills .nav-link:hover {
+            background-color: var(--slate-50);
+            color: var(--slate-800);
+        }
+        .nav-pills .nav-link.active {
+            background-color: var(--slate-50);
+            color: var(--emerald-600);
+            border-left-color: var(--emerald-600);
+        }
+        .tab-img-container {
+            aspect-ratio: 3/4;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        /* YouTube Section */
+        .video-thumbnail {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            background-color: var(--slate-200);
+        }
+        .video-thumbnail img {
+            transition: transform 0.7s ease;
+        }
+        .video-thumbnail:hover img { transform: scale(1.05); }
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .video-thumbnail:hover .play-overlay { background: rgba(0,0,0,0.4); }
+        .play-icon { font-size: 4rem; color: rgba(255,255,255,0.8); transition: all 0.3s; }
+        .video-thumbnail:hover .play-icon { color: white; transform: scale(1.1); }
+        
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .group:hover .blob { opacity: 1; }
+
+        /* Contact */
+        .contact-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            outline: none;
+            transition: all 0.2s;
+        }
+        .contact-input:focus {
+            border-color: var(--emerald-500);
+            box-shadow: 0 0 0 2px var(--emerald-200);
+        }
+        .contact-decoration-1 {
+            position: absolute; top: 0; right: 0; width: 16rem; height: 16rem;
+            background-color: rgba(16, 185, 129, 0.1);
+            border-radius: 50%; filter: blur(60px);
+            transform: translate(50%, -50%);
+        }
+        .contact-decoration-2 {
+            position: absolute; bottom: 0; left: 0; width: 16rem; height: 16rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 50%; filter: blur(60px);
+            transform: translate(-50%, 50%);
+        }
+        .contact-icon-box {
+            width: 3rem; height: 3rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .social-link {
+            width: 2.5rem; height: 2.5rem;
+            background-color: var(--slate-200);
+            color: var(--slate-600);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.3s;
+        }
+        .social-link:hover { color: white; }
+        .social-link.yt:hover { background-color: #dc2626; }
+        .social-link.fb:hover { background-color: #2563eb; }
+        .social-link.ig:hover { background-color: #db2777; }
+        .social-link.tw:hover { background-color: black; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 991px) {
+            .hero-title { font-size: 2.5rem; }
+            .nav-pills { border-right: none !important; border-bottom: 1px solid var(--slate-100); padding-bottom: 1rem; margin-bottom: 2rem; }
+            .nav-pills .nav-link { border-left: none; border-bottom: 4px solid transparent; }
+            .nav-pills .nav-link.active { border-left: none; border-bottom-color: var(--emerald-600); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-slate-800" href="#">
+                <span class="text-emerald">Bilalsha</span> <span class="d-none d-md-inline">Jamali Nizami Tanur</span><span class="d-md-none">BJNT</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-slate-700"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-center mt-4 mt-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Expertise</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#engagement">Engagement</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="d-flex flex-column justify-content-center">
+        <div class="hero-bg-overlay"></div>
+        <div class="container position-relative z-1">
+            <div class="row">
+                <div class="col-lg-10" data-aos="fade-down" data-aos-delay="100">
+                    <h2 class="display-4 fw-bold text-slate-800 mb-2 hero-title">BILALSHA JAMALI NIZAMI TANUR</h2>
+                    <p class="fs-4 text-emerald fw-medium mb-4">Islamic Scholar · Sunni Researcher · Public Educator</p>
+                    <p class="fs-5 text-slate-600 mb-5 lh-base" style="max-width: 650px;">
+                        Advancing authentic Ahl al-Sunnah wal Jama'ah through scholarship, reasoned discourse, and intellectual clarity.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mb-5">
+                        <a href="#about" class="btn-emerald">Read About</a>
+                        <a href="#contact" class="btn-outline-custom">Invite for Lecture</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-4">
+                <!-- Main Box -->
+                <div class="col-lg-4" data-aos="zoom-out" data-aos-delay="200">
+                    <div class="bg-emerald p-4 p-lg-5 rounded-2xl h-100 d-flex flex-column justify-content-between shadow-custom-lg text-white">
+                        <div>
+                            <h3 class="fw-bold mb-3 h2">Scholarly Approach</h3>
+                            <p class="mb-4" style="color: var(--emerald-50); line-height: 1.7;">
+                                Clarity, balance, and intellectual integrity—grounded in classical Sunni scholarship and methodical reasoning to address contemporary challenges with depth and calm.
+                            </p>
+                        </div>
+                        <a href="#about" class="text-white text-decoration-none fw-semibold d-inline-flex align-items-center gap-2">
+                            <span class="px-3 py-2 rounded-pill bg-white bg-opacity-25 hover-bg-opacity-40 transition">
+                                Learn More <i class="bi bi-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Icons -->
+                <div class="col-lg-8">
+                    <div class="row g-4 h-100">
+                        <div class="col-md-4" data-aos="zoom-out" data-aos-delay="300">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-light h-100">
+                                <div class="hero-card-icon mb-3"><i class="bi bi-book"></i></div>
+                                <h4 class="fw-bold fs-5 text-slate-800 mb-2">Aqeedah</h4>
+                                <p class="small text-slate-600 mb-0">Systematic exposition of creed with classical frameworks.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="zoom-out" data-aos-delay="400">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-light h-100">
+                                <div class="hero-card-icon mb-3"><i class="bi bi-chat-dots"></i></div>
+                                <h4 class="fw-bold fs-5 text-slate-800 mb-2">Refutations</h4>
+                                <p class="small text-slate-600 mb-0">Principled responses to distortions and ideological challenges.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="zoom-out" data-aos-delay="500">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-light h-100">
+                                <div class="hero-card-icon mb-3"><i class="bi bi-collection-play"></i></div>
+                                <h4 class="fw-bold fs-5 text-slate-800 mb-2">Outreach</h4>
+                                <p class="small text-slate-600 mb-0">Accessible scholarship via YouTube and Facebook.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-white">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="position-relative">
+                        <div class="ratio ratio-4x3 rounded-2xl overflow-hidden shadow-custom-2xl">
+                            <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=800&auto=format&fit=crop" alt="Bilalsha Jamali Nizami Tanur" class="object-cover">
+                            <div class="position-absolute w-100 h-100 start-0 top-0" style="background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="fw-bold mb-4 text-slate-800 h2">About Bilalsha Jamali Nizami Tanur</h3>
+                    <p class="text-slate-600 mb-4 lh-lg">
+                        Bilalsha Jamali Nizami Tanur is a traditionally trained Islamic scholar whose academic grounding is firmly rooted in classical Sunni scholarship. He harmonizes time-honored Islamic sciences with methodical reasoning and critical engagement, presenting orthodox Sunni teachings with accuracy, clarity, and responsibility.
+                    </p>
+
+                    <div class="d-flex flex-column gap-3 mt-4">
+                        <div class="d-flex gap-3 check-list-item">
+                            <i class="bi bi-check-circle-fill fs-4 text-emerald"></i>
+                            <div>
+                                <h5 class="text-slate-800">Classical Sunni grounding</h5>
+                                <p class="text-slate-600 mb-0">Aligned with authentic scholarship and orthodox methodology.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3 check-list-item">
+                            <i class="bi bi-check-circle-fill fs-4 text-emerald"></i>
+                            <div>
+                                <h5 class="text-slate-800">Reasoned theology</h5>
+                                <p class="text-slate-600 mb-0">Clear, structured argumentation integrating rational analysis.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3 check-list-item">
+                            <i class="bi bi-check-circle-fill fs-4 text-emerald"></i>
+                            <div>
+                                <h5 class="text-slate-800">Responsible public engagement</h5>
+                                <p class="text-slate-600 mb-0">Calm, scholarly discourse against misinterpretations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Expertise -->
+    <section id="services" class="section-padding bg-slate-50">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold text-slate-800 mb-3 h2">Areas of Expertise</h2>
+                <p class="text-slate-600 fs-5 mx-auto" style="max-width: 600px;">
+                    Classical scholarship, reasoned discourse, and accessible teaching.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Card 1 -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card bg-white p-4 h-100 rounded-2xl">
+                        <div class="service-icon mb-4"><i class="bi bi-journal-bookmark"></i></div>
+                        <h3 class="h5 fw-bold text-slate-800 mb-3">Aqeedah (Islamic Creed)</h3>
+                        <p class="text-slate-600">Systematic exposition of Sunni creed; clarifying misconceptions with textual evidence.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card bg-white p-4 h-100 rounded-2xl">
+                        <div class="service-icon mb-4"><i class="bi bi-cpu"></i></div>
+                        <h3 class="h5 fw-bold text-slate-800 mb-3">Reasoned Theology</h3>
+                        <p class="text-slate-600">Structured, evidence-based argumentation integrating reason and revelation.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card bg-white p-4 h-100 rounded-2xl">
+                        <div class="service-icon mb-4"><i class="bi bi-diagram-3"></i></div>
+                        <h3 class="h5 fw-bold text-slate-800 mb-3">Comparative Ideologies</h3>
+                        <p class="text-slate-600">Critical analysis and refutation of contemporary movements affecting Islamic thought.</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card bg-white p-4 h-100 rounded-2xl">
+                        <div class="service-icon mb-4"><i class="bi bi-moon-stars"></i></div>
+                        <h3 class="h5 fw-bold text-slate-800 mb-3">Sufism (Tasawwuf)</h3>
+                        <p class="text-slate-600">Authentic Sunni Tasawwuf rooted in Shariah and orthodox creed; Chishti & Qadiri lineages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Public Engagement -->
+    <section id="engagement" class="section-padding bg-white">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold text-slate-800 mb-3 h2">Public Engagement</h2>
+                <p class="text-slate-600 fs-5 mx-auto" style="max-width: 600px;">
+                    Lectures, debates, defense of Ahl al-Sunnah, and digital outreach.
+                </p>
+            </div>
+
+            <div class="row g-5" data-aos="fade-up" data-aos-delay="100">
+                <!-- Navigation Tabs -->
+                <div class="col-lg-3 border-end-lg border-slate-100">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button class="nav-link active" id="v-pills-lectures-tab" data-bs-toggle="pill" data-bs-target="#v-pills-lectures" type="button" role="tab">Public Lectures</button>
+                        <button class="nav-link" id="v-pills-debates-tab" data-bs-toggle="pill" data-bs-target="#v-pills-debates" type="button" role="tab">Debates & Dialogue</button>
+                        <button class="nav-link" id="v-pills-defense-tab" data-bs-toggle="pill" data-bs-target="#v-pills-defense" type="button" role="tab">Defense of Ahl al‑Sunnah</button>
+                        <button class="nav-link" id="v-pills-digital-tab" data-bs-toggle="pill" data-bs-target="#v-pills-digital" type="button" role="tab">Digital Outreach</button>
+                    </div>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="col-lg-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        
+                        <!-- Lectures -->
+                        <div class="tab-pane fade show active" id="v-pills-lectures" role="tabpanel">
+                            <div class="row align-items-center g-5">
+                                <div class="col-lg-8 order-2 order-lg-1">
+                                    <h3 class="fw-bold text-slate-800 mb-3">Public Lectures</h3>
+                                    <p class="fs-5 text-slate-500 fst-italic fw-light mb-4">Clarity-driven sessions addressing theology, belief systems, and contemporary challenges.</p>
+                                    <p class="text-slate-600 fs-5 lh-lg">Lectures are designed for accessibility without compromising scholarly depth, grounded in Qur'an, authentic Hadith, Ijma', and classical scholarship.</p>
+                                </div>
+                                <div class="col-lg-4 order-1 order-lg-2">
+                                    <div class="tab-img-container">
+                                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop" class="object-cover" alt="Public Lectures">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Debates -->
+                        <div class="tab-pane fade" id="v-pills-debates" role="tabpanel">
+                            <div class="row align-items-center g-5">
+                                <div class="col-lg-8 order-2 order-lg-1">
+                                    <h3 class="fw-bold text-slate-800 mb-3">Debates & Dialogue</h3>
+                                    <p class="fs-5 text-slate-500 fst-italic fw-light mb-4">Academic, principled engagements with well-known scholars across platforms.</p>
+                                    <p class="text-slate-600 fs-5 lh-lg">Methodological discipline and transparency distinguish these dialogues, making them beneficial for serious learners and the wider public.</p>
+                                </div>
+                                <div class="col-lg-4 order-1 order-lg-2">
+                                    <div class="tab-img-container">
+                                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b955?q=80&w=800&auto=format&fit=crop" class="object-cover" alt="Debates">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Defense -->
+                        <div class="tab-pane fade" id="v-pills-defense" role="tabpanel">
+                            <div class="row align-items-center g-5">
+                                <div class="col-lg-8 order-2 order-lg-1">
+                                    <h3 class="fw-bold text-slate-800 mb-3">Defense of Ahl al‑Sunnah</h3>
+                                    <p class="fs-5 text-slate-500 fst-italic fw-light mb-4">Systematic refutations against deviant ideologies and anti‑Sunni narratives.</p>
+                                    <p class="text-slate-600 fs-5 lh-lg">Grounded in Qur'an, authentic Hadith, Ijma', and Qiyas, with structured reasoning and authoritative references.</p>
+                                </div>
+                                <div class="col-lg-4 order-1 order-lg-2">
+                                    <div class="tab-img-container">
+                                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop" class="object-cover" alt="Defense">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Digital -->
+                        <div class="tab-pane fade" id="v-pills-digital" role="tabpanel">
+                            <div class="row align-items-center g-5">
+                                <div class="col-lg-8 order-2 order-lg-1">
+                                    <h3 class="fw-bold text-slate-800 mb-3">Digital Outreach</h3>
+                                    <p class="fs-5 text-slate-500 fst-italic fw-light mb-4">Traditional Sunni scholarship made accessible via YouTube & Facebook.</p>
+                                    <p class="text-slate-600 fs-5 lh-lg">Short clips, full lectures, and debates are curated to aid systematic learning and public benefit.</p>
+                                </div>
+                                <div class="col-lg-4 order-1 order-lg-2">
+                                    <div class="tab-img-container">
+                                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop" class="object-cover" alt="Digital Outreach">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Section -->
+    <section id="youtube-narrative" class="section-padding bg-slate-50 overflow-hidden">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold text-slate-800 mb-3 h2">Knowledge Archives</h2>
+                <p class="text-slate-600 fs-5 mx-auto" style="max-width: 600px;">
+                    In-depth lectures and scholarly discourse from Bilalsha Jamali Nizami Tanur
+                </p>
+            </div>
+
+            <!-- Featured Video -->
+            <div class="row mb-5" data-aos="zoom-in">
+                <div class="col-12">
+                    <div class="bg-white rounded-4xl shadow-custom-lg overflow-hidden">
+                        <div class="row g-0">
+                            <div class="col-lg-8 position-relative video-thumbnail bg-slate-900" style="min-height: 400px;">
+                                <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=800&auto=format&fit=crop" alt="Featured" class="object-cover" style="opacity: 0.5;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle play-icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 bg-slate-900 text-white p-5 d-flex flex-column justify-content-center">
+                                <span class="badge bg-danger rounded-pill align-self-start mb-4 px-3 py-2">MUST WATCH</span>
+                                <h3 class="fw-bold mb-4">Understanding the Fundamentals</h3>
+                                <p class="text-slate-400 mb-5 lh-lg">An exclusive deep dive into the core principles of Aqeedah. In this session, we explore the historical context and modern applications of traditional texts.</p>
+                                <a href="#" class="btn btn-outline-light rounded-pill py-3 px-4 fw-bold">Visit Channel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Narrative Items -->
+            
+            <!-- Item 1 -->
+            <div class="row g-5 align-items-center mb-5 pb-5 border-bottom border-light" data-aos="fade-up">
+                <div class="col-lg-6">
+                    <div class="position-relative group">
+                        <div class="blob bg-emerald-100" style="inset: -1rem; width: calc(100% + 2rem); height: calc(100% + 2rem);"></div>
+                        <div class="ratio ratio-16x9 rounded-2xl shadow-lg video-thumbnail position-relative z-2">
+                            <img src="https://images.unsplash.com/photo-1576085852415-472e35b7a111?q=80&w=800&auto=format&fit=crop" alt="Hadith" class="object-cover opacity-75">
+                            <div class="play-overlay"><i class="bi bi-play-circle play-icon" style="font-size: 3.5rem;"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4 class="text-danger fw-bold mb-2">#1. The Science of Hadith</h4>
+                    <h3 class="fw-bold text-slate-800 mb-3 h2">Unlocking the Chains of Transmission</h3>
+                    <p class="text-slate-600 mb-4 fs-5">This lecture breaks down the complex methodology used by early scholars to verify prophetic traditions. We discuss:</p>
+                    <ul class="list-unstyled d-flex flex-column gap-3 mb-4">
+                        <li class="d-flex align-items-center gap-3 text-slate-700"><i class="bi bi-check-circle-fill text-emerald"></i> The criteria for authentic narrators</li>
+                        <li class="d-flex align-items-center gap-3 text-slate-700"><i class="bi bi-check-circle-fill text-emerald"></i> Difference between Sahih and Hasan</li>
+                        <li class="d-flex align-items-center gap-3 text-slate-700"><i class="bi bi-check-circle-fill text-emerald"></i> Modern misconceptions addressed</li>
+                    </ul>
+                    <a href="#" class="text-danger fw-bold text-uppercase small d-inline-flex align-items-center gap-2">Watch Full Series <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="row g-5 align-items-center mb-5 pb-5 border-bottom border-light" data-aos="fade-up">
+                <div class="col-lg-6 order-2 order-lg-1 text-lg-end">
+                    <h4 class="text-emerald fw-bold mb-2">#2. Spiritual Purification</h4>
+                    <h3 class="fw-bold text-slate-800 mb-3 h2">Tasawwuf in the Modern Age</h3>
+                    <p class="text-slate-600 mb-4 fs-5">How do we maintain a pure heart in a world full of distractions? This session focuses on the practical aspects of Tazkiyat al-Nafs.</p>
+                    <figure class="text-end mb-4">
+                        <blockquote class="blockquote text-slate-500 fst-italic pe-3 border-end border-4 border-success">
+                            "The heart finds no rest except in the remembrance of its Creator."
+                        </blockquote>
+                    </figure>
+                    <a href="#" class="btn-emerald d-inline-block">View Playlist</a>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="position-relative group">
+                        <div class="blob bg-info bg-opacity-10" style="inset: -1rem; width: calc(100% + 2rem); height: calc(100% + 2rem);"></div>
+                        <div class="ratio ratio-16x9 rounded-2xl shadow-lg video-thumbnail position-relative z-2">
+                            <img src="https://images.unsplash.com/photo-1548544149-4835e62ee5b3?q=80&w=800&auto=format&fit=crop" alt="Spiritual" class="object-cover opacity-75">
+                            <div class="play-overlay"><i class="bi bi-play-circle play-icon" style="font-size: 3.5rem;"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="row g-5 align-items-center" data-aos="fade-up">
+                <div class="col-lg-6">
+                    <div class="position-relative group">
+                        <div class="blob bg-primary bg-opacity-10" style="inset: -1rem; width: calc(100% + 2rem); height: calc(100% + 2rem);"></div>
+                        <div class="ratio ratio-16x9 rounded-2xl shadow-lg video-thumbnail position-relative z-2">
+                            <img src="https://images.unsplash.com/photo-1589330694653-37875775585c?q=80&w=800&auto=format&fit=crop" alt="Debates" class="object-cover opacity-75">
+                            <div class="play-overlay"><i class="bi bi-play-circle play-icon" style="font-size: 3.5rem;"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4 class="text-primary fw-bold mb-2">#3. Contemporary Debates</h4>
+                    <h3 class="fw-bold text-slate-800 mb-3 h2">Addressing Modern Challenges</h3>
+                    <p class="text-slate-600 mb-4 fs-5">A specialized debate session covering contemporary questions raised by the youth. This video provides logical and theological answers to pressing social issues.</p>
+                    <div class="d-flex gap-2 mb-3">
+                        <span class="badge bg-slate-100 text-slate-600 p-2 fw-medium">Logic</span>
+                        <span class="badge bg-slate-100 text-slate-600 p-2 fw-medium">Theology</span>
+                        <span class="badge bg-slate-100 text-slate-600 p-2 fw-medium">Social Issues</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-white">
+        <div class="container" data-aos="fade-up">
+            <div class="bg-white rounded-4xl shadow-custom-2xl overflow-hidden d-flex flex-column flex-lg-row">
+                
+                <!-- Form Side -->
+                <div class="col-lg-7 p-4 p-lg-5 d-flex flex-column justify-content-center">
+                    <div class="mb-5">
+                        <h2 class="fw-bold text-slate-900 mb-2 h2">Get in Touch</h2>
+                        <p class="text-slate-500">Send a message for invitations or scholarly inquiries.</p>
+                    </div>
+
+                    <!-- 
+                       UPDATED FORM 
+                       1. action="...": Points to the email service.
+                       2. method="POST": Required for sending data.
+                    -->
+                    <form action="https://formsubmit.co/INSERT_YOUR_EMAIL_HERE@gmail.com" method="POST">
+                        
+                        <!-- Hidden Settings for the Email Service -->
+                        <input type="hidden" name="_subject" value="New Message from Bilalsha Website">
+                        <input type="hidden" name="_captcha" value="false"> <!-- Disables robot puzzle -->
+                        <input type="hidden" name="_template" value="table"> <!-- Makes the email look nice -->
+                        
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label fw-medium text-slate-700 small">Your Name</label>
+                                <!-- Added name="name" -->
+                                <input type="text" name="name" id="name" class="contact-input" placeholder="Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label fw-medium text-slate-700 small">Your Email</label>
+                                <!-- Added name="email" -->
+                                <input type="email" name="email" id="email" class="contact-input" placeholder="Email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="subject" class="form-label fw-medium text-slate-700 small">Subject</label>
+                            <!-- Added name="subject" -->
+                            <input type="text" name="subject" id="subject" class="contact-input" placeholder="Subject" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="message" class="form-label fw-medium text-slate-700 small">Message</label>
+                            <!-- Added name="message" -->
+                            <textarea name="message" id="message" rows="4" class="contact-input" placeholder="Message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn bg-slate-900 text-white rounded-pill w-100 py-3 fw-bold d-flex align-items-center justify-content-center gap-2 hover-bg-emerald transition">
+                            Send Message <i class="bi bi-send"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Info Side (Unchanged) -->
+                <div class="col-lg-5 bg-slate-900 text-white p-4 p-lg-5 position-relative d-flex flex-column justify-content-between overflow-hidden">
+                    <div class="contact-decoration-1"></div>
+                    <div class="contact-decoration-2"></div>
+
+                    <div class="position-relative z-2">
+                        <h3 class="h3 fw-light mb-4 pb-3 border-bottom border-secondary border-opacity-25">Contact Info</h3>
+                        
+                        <div class="d-flex flex-column gap-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="contact-icon-box"><i class="bi bi-geo-alt"></i></div>
+                                <div>
+                                    <h6 class="text-white text-opacity-50 small fw-bold text-uppercase mb-1">Location</h6>
+                                    <p class="fs-5 mb-0">Tanur, Kerala, India</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="contact-icon-box"><i class="bi bi-whatsapp"></i></div>
+                                <div>
+                                    <h6 class="text-white text-opacity-50 small fw-bold text-uppercase mb-1">WhatsApp</h6>
+                                    <p class="fs-5 mb-0">+91 98765 43210</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="contact-icon-box"><i class="bi bi-envelope"></i></div>
+                                <div>
+                                    <h6 class="text-white text-opacity-50 small fw-bold text-uppercase mb-1">Email</h6>
+                                    <p class="fs-5 mb-0">contact@bilalshatanur.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 position-relative z-2 rounded-2xl overflow-hidden bg-slate-800" style="height: 200px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31306.38255855719!2d75.85731861175825!3d10.977740648511626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7be8b8dde2c4f%3A0xf511b9b2a39341f8!2sTanur%2C%20Kerala!5e0!3m2!1sen!2sin!4v1721381234567" 
+                                width="100%" height="100%" style="border:0; filter: grayscale(1) invert(0.9);" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 py-5 border-top border-slate-200">
+        <div class="container text-center">
+            <h3 class="fw-bold text-slate-800 mb-3">Bilalsha J. N. Tanur</h3>
+            <p class="text-slate-500 mx-auto mb-4" style="max-width: 500px;">
+                Dedicated to spreading authentic Islamic knowledge, fostering reasoned dialogue, and spiritual purification.
+            </p>
+
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <a href="#" class="social-link yt"><i class="bi bi-youtube"></i></a>
+                <a href="#" class="social-link fb"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="social-link ig"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="social-link tw"><i class="bi bi-twitter-x"></i></a>
+            </div>
+
+            <div class="text-slate-400 small pt-4 border-top border-slate-200">
+                &copy; 2024 <strong>Bilalsha Tanur</strong>. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('mainNavbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Close mobile menu on click
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuToggle = document.querySelector('.navbar-collapse');
+        const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle: false});
+        
+        navLinks.forEach((l) => {
+            l.addEventListener('click', () => {
+                if(menuToggle.classList.contains('show')) {
+                    bsCollapse.hide();
+                }
+            })
+        });
+    </script>
+</body>
+</html>
